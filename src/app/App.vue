@@ -94,6 +94,7 @@ const progress = computed(() => (routeState.visited.length / 9) * 100);
             @play="commands.play"
             @end="commands.turn"
             @settle="commands.settle"
+            @disengage="commands.disengage"
           /><RewardPanel
             v-else-if="session.tab === 'reward'"
             @claim="commands.claim"
@@ -101,6 +102,8 @@ const progress = computed(() => (routeState.visited.length / 9) * 100);
             v-else-if="session.tab === 'shop'"
             :gold="deckState.hero.gold"
             @buy="commands.buy"
+            @confirm="commands.confirmBuy"
+            @cancel="commands.cancelQuote"
             @leave="commands.leaveShop"
           /><DeckPanel
             v-else
@@ -138,6 +141,18 @@ const progress = computed(() => (routeState.visited.length / 9) * 100);
             </div>
           </div>
           <p class="rail-note">“一副牌，一条路。<br />你带走的不止是胜利。”</p>
+          <div
+            class="rail-alert"
+            :class="`stage-${routeState.alertStage}`"
+            v-if="routeState.alertStage > 0 || routeState.pursuit.active"
+          >
+            <span class="eyebrow">REGION ALERT</span>
+            <b>{{ routeState.alertStage === 2 ? "围猎" : "哨戒" }}</b>
+            <small v-if="routeState.pursuit.active">
+              追击倒计时：{{ routeState.pursuit.remaining }} 场战斗
+            </small>
+            <small v-else>追兵暂未锁定你的路线</small>
+          </div>
         </aside>
       </div>
       <footer>

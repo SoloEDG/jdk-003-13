@@ -4,10 +4,10 @@ import { exportDeck, restoreDeck } from "@/features/deck";
 import { exportReward, restoreReward } from "@/features/reward";
 import { exportShop, restoreShop } from "@/features/shop";
 import { exportSession, restoreSession } from "./session";
-const KEY = "ember-path-v1";
+const KEY = "ember-path-v2";
 function snapshot() {
   return {
-    version: 1,
+    version: 2,
     route: exportRoute(),
     battle: exportBattle(),
     deck: exportDeck(),
@@ -30,7 +30,7 @@ export function load() {
   try {
     const d = JSON.parse(raw);
     if (
-      d.version !== 1 ||
+      d.version !== 2 ||
       !Array.isArray(d.deck?.cards) ||
       !Array.isArray(d.route?.visited) ||
       !d.battle?.piles ||

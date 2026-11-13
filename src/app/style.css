@@ -640,6 +640,146 @@ details {
 .stock button {
   font-size: 11px;
 }
+
+/* —— 地区警戒与追击 —— */
+.alert-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #b9c69a;
+  border: 1px solid #4a5739;
+  background: #222b1d;
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+.alert-line b {
+  color: #d8dfa7;
+  letter-spacing: 2px;
+}
+.alert-line em {
+  font-style: normal;
+  color: #d9a48f;
+}
+.alert-line.stage-2 {
+  border-color: #a8634f;
+  background: #3a251f;
+}
+.alert-line.stage-2 b {
+  color: #e8a48c;
+}
+.pursuit-tag {
+  margin-left: auto;
+  font-style: normal;
+  font-size: 10px;
+  color: #d9a48f;
+  border: 1px solid #7a4a3c;
+  border-radius: 3px;
+  padding: 3px 6px;
+  white-space: nowrap;
+}
+.pursuit-tag.countdown {
+  color: #cbb97d;
+  border-color: #6c5f37;
+}
+.route-node.intercept {
+  border-color: #c0755c;
+  box-shadow: 0 0 16px #c0755c33;
+}
+.pursuit-banner {
+  border: 1px solid #8a5a48;
+  background: #34251f;
+  color: #e3b9a8;
+  border-radius: 4px;
+  padding: 12px 16px;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+.pursuit-banner.engaged {
+  border-color: #c0755c;
+  background: #41261f;
+}
+.pursuit-banner b {
+  color: #f0c4af;
+}
+.disengage {
+  margin-top: 14px;
+  width: 100%;
+  border-color: #7a4a3c;
+  color: #e0b3a0;
+  background: #2e201c;
+}
+.disengage:hover {
+  border-color: #c0755c;
+}
+.rail-alert {
+  border: 1px solid #6c5f37;
+  border-radius: 6px;
+  padding: 16px;
+  background: #262a1c;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rail-alert.stage-2 {
+  border-color: #a8634f;
+  background: #33201b;
+}
+.rail-alert b {
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #e3b9a8;
+  font-weight: 400;
+}
+.rail-alert small {
+  font-size: 10px;
+  color: #a89c78;
+}
+
+/* —— 奖励结局说明 —— */
+.reward-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.reward-summary b {
+  letter-spacing: 2px;
+  color: #e6d9a8;
+}
+.reward-reason {
+  margin: 0;
+  line-height: 1.7;
+  color: #c4cfa4;
+}
+.reward-missed {
+  margin: 0;
+  color: #d9a48f;
+  font-size: 11px;
+}
+
+/* —— 商店报价与商队 —— */
+.quote-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.quote-box small {
+  color: #a8b892;
+}
+.quote-box .toolbar {
+  margin-top: 6px;
+}
+.caravan-note {
+  font-size: 11px;
+  color: #cbb97d;
+  border: 1px dashed #6c5f37;
+  border-radius: 4px;
+  padding: 10px 12px;
+  line-height: 1.7;
+}
+
 footer {
   display: flex;
   justify-content: space-between;

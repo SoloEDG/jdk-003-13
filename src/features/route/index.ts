@@ -4,6 +4,7 @@ export {
   choices,
   enterRoute,
   resolveRoute,
+  isInterceptNode,
   exportRoute,
   restoreRoute,
   resetRoute,

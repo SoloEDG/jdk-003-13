@@ -4,6 +4,8 @@ export {
   beginBattle,
   playCard,
   endTurn,
+  disengagePursuit,
+  turnsUntilRetreat,
   currentIntent,
   exportBattle,
   restoreBattle,

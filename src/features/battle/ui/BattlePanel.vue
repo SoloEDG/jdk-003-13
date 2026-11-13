@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { battleState, currentIntent } from "../model/state";
+import { battleState, currentIntent, turnsUntilRetreat } from "../model/state";
 import { cards } from "@/shared/cards";
 import ActorCard from "./ActorCard.vue";
-defineEmits<{ play: [id: string]; end: []; settle: [] }>();
+defineEmits<{
+  play: [id: string];
+  end: [];
+  settle: [];
+  disengage: [];
+}>();
 </script>
 <template>
   <section class="panel battle-panel">
@@ -11,6 +16,24 @@ defineEmits<{ play: [id: string]; end: []; settle: [] }>();
       ><span>回合 {{ battleState.turn }}</span>
     </div>
     <h2>{{ battleState.enemy?.name ?? "等待下一场遭遇" }}</h2>
+    <div
+      v-if="battleState.intercept && battleState.phase === 'playing'"
+      class="pursuit-banner"
+      :class="{ engaged: battleState.pursuerEngaged }"
+    >
+      <template v-if="!battleState.retreated">
+        ⚠ 追击拦截战 · 原敌人将在
+        <b>{{ turnsUntilRetreat() }}</b>
+        个回合后撤离，由
+        {{ battleState.alertStage === 2 ? "围猎追缉者" : "哨戒追兵" }}
+        接替
+      </template>
+      <template v-else>
+        ⚠ 原敌人已带着掉落撤离，当前是接替上场的
+        <b>{{ battleState.enemy?.name }}</b
+        >：它不继承原敌人的中毒与格挡
+      </template>
+    </div>
     <div v-if="battleState.enemy" class="arena">
       <ActorCard :actor="battleState.hero" name="余烬旅人" />
       <div class="versus">
@@ -60,6 +83,14 @@ defineEmits<{ play: [id: string]; end: []; settle: [] }>();
           <small>{{ cards[c.key]!.kind.toUpperCase() }}</small>
         </button>
       </div>
+      <button
+        v-if="battleState.pursuerEngaged"
+        class="disengage"
+        data-action="disengage"
+        @click="$emit('disengage')"
+      >
+        不再缠斗，放追兵脱身（按敌人撤退结算）
+      </button>
     </div>
     <div
       v-if="battleState.phase === 'won' || battleState.phase === 'lost'"
@@ -68,7 +99,9 @@ defineEmits<{ play: [id: string]; end: []; settle: [] }>();
       <h3>
         {{
           battleState.phase === "won"
-            ? "遭遇胜利 · 火种仍在"
+            ? battleState.retreated
+              ? "遭遇结束 · 敌人已撤退"
+              : "遭遇胜利 · 火种仍在"
             : "旅途结束 · 余烬熄灭"
         }}
       </h3>
